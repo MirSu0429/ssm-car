@@ -2,58 +2,74 @@ package com.ssm.entity;
 
 public class Operationgoods {
 	private Integer id;
-	private String goods_id;
-	private String goods_name;
-	private String goods_tel;
-	private String goods_address;
-	private Integer goods_sure;
+	private String goodsId;
+	private String goodsName;
+	private String goodsTel;
+	private String goodsAddress;
+	private Integer goodsSure;
 	private Car car;
 	private Customer cust;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getGoods_id() {
-		return goods_id;
+
+	public String getGoodsId() {
+		return goodsId;
 	}
-	public void setGoods_id(String goods_id) {
-		this.goods_id = goods_id;
+
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
 	}
-	public String getGoods_name() {
-		return goods_name;
+
+	public String getGoodsName() {
+		return goodsName;
 	}
-	public void setGoods_name(String goods_name) {
-		this.goods_name = goods_name;
+
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
-	public String getGoods_tel() {
-		return goods_tel;
+
+	public String getGoodsTel() {
+		return goodsTel;
 	}
-	public void setGoods_tel(String goods_tel) {
-		this.goods_tel = goods_tel;
+
+	public void setGoodsTel(String goodsTel) {
+		this.goodsTel = goodsTel;
 	}
-	public String getGoods_address() {
-		return goods_address;
+
+	public String getGoodsAddress() {
+		return goodsAddress;
 	}
-	public void setGoods_address(String goods_address) {
-		this.goods_address = goods_address;
+
+	public void setGoodsAddress(String goodsAddress) {
+		this.goodsAddress = goodsAddress;
 	}
-	public Integer getGoods_sure() {
-		return goods_sure;
+
+	public Integer getGoodsSure() {
+		return goodsSure;
 	}
-	public void setGoods_sure(Integer goods_sure) {
-		this.goods_sure = goods_sure;
+
+	public void setGoodsSure(Integer goodsSure) {
+		this.goodsSure = goodsSure;
 	}
+
 	public Car getCar() {
 		return car;
 	}
+
 	public void setCar(Car car) {
 		this.car = car;
 	}
+
 	public Customer getCust() {
 		return cust;
 	}
+
 	public void setCust(Customer cust) {
 		this.cust = cust;
 	}
