@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.CarMapper">
+	
+	<resultMap type="Car" id="carAndCarlog">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="user_number" property="user_number"/>
+		<result column="car_number" property="car_number"/>
+		<result column="tel" property="tel"/>
+		<result column="address" property="address"/>
+		<result column="car_road" property="car_road"/>
+		<result column="car_content" property="car_content"/>
+		<association property="carlog" javaType="Carlog">
+			<id column="carlogid" property="id"/>
+			<result column="goods_id" property="goods_id"/>
+			<result column="startTime" property="startTime"/>
+			<result column="endTime" property="endTime"/>
+			<result column="describer" property="describer"/>
+		</association>
+	</resultMap>
+	<!-- 查全部 -->
+	<select id="queryCar" resultMap="carAndCarlog">
+		select a.id,username,user_number,car_number,tel,address,car_road,car_content,b.id carlogid , goods_id,startTime,endTime,describer 
+		from tb_car a left join  tb_carlog b
+		on a.id=car_id
+		order by a.id 
+	</select>
+	<!-- 查空闲车辆 -->
+	<select id="queryCarFreed" resultType="car">
+		select a.id,car_number
+		from tb_car a left join  tb_carlog b
+		on a.id=car_id 
+		where car_id is null
+	</select>
+	<!-- 查一个 -->
+	<select id="getCar" parameterType="int" resultType="Car">
+		select id,username,user_number,car_number,tel,address,car_road,car_content 
+		from tb_car 
+		where id = #{id}
+	</select>
+	<!-- 修改 -->
+	<update id="updateCar" parameterType="Car">
+		update tb_car 
+	<set>
+		<if test="username!=null and username!=''">
+			username=#{username},
+		</if>
+		<if test="user_number!=null and user_number!=''">
+			user_number=#{user_number},
+		</if>
+		<if test="car_number!=null and car_number!=''">
+			car_number=#{car_number},
+		</if>
+		<if test="tel!=null and tel!=''">
+			tel=#{tel},
+		</if>
+		<if test="address!=null and address!=''">
+			address=#{address},
+		</if>
+		<if test="car_road!=null and car_road!=''">
+			car_road=#{car_road},
+		</if>
+		<if test="car_content!=null and car_content!=''">
+			car_content=#{car_content},
+		</if>
+	</set>
+		where id=#{id}
+	</update>
+	<!-- 添加 -->
+	<insert id="insertCar" parameterType="Car">
+		insert into tb_car 
+		(username,user_number,car_number,tel,address,car_road,car_content) 
+		values(#{username},#{user_number},#{car_number},#{tel},#{address},#{car_road},#{car_content})
+	</insert>
+	<!-- 删除 -->
+	<delete id="deleteCar" parameterType="int">
+		delete from tb_car
+		where id=#{id}
+	</delete>
+</mapper>

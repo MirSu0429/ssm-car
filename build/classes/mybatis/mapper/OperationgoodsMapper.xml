@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.OperationgoodsMapper">
+	<insert id="insertOperationgoods" parameterType="Operationgoods">
+		insert into tb_operationgoods 
+		(car_id,customer_id,goods_id,goods_name,goods_tel,goods_address,goods_sure)
+		values(#{car.id},#{cust.customer_id},#{goods_id},#{goods_name},#{goods_tel},#{goods_address},0)
+	</insert>
+	<!-- 查发货单信息 -->
+	<resultMap type="Operationgoods" id="operAndCarAndCarlog">
+		<id column="operid" property="id"/>
+		<result column="goods_id" property="goods_id"/>
+		<result column="goods_name" property="goods_name"/>
+		<result column="goods_tel" property="goods_tel"/>
+		<result column="goods_address" property="goods_address"/>
+		<result column="goods_sure" property="goods_sure"/>
+		<association property="car" javaType="Car">
+			<id column="carid" property="id"/>
+			<result column="username" property="username"/>
+			<result column="car_number" property="car_number"/>
+			<result column="tel" property="tel"/>
+			<result column="address" property="address"/>
+			<result column="car_road" property="car_road"/>
+			<association property="carlog" javaType="Carlog">
+				<id column="carlogid" property="id"/>
+				<result column="startTime" property="startTime"/>
+				<result column="goods_id" property="goods_id"/>
+				<result column="endTime" property="endTime"/>
+				<result column="describer" property="describer"/>
+			</association>
+		</association>
+		<association property="cust" javaType="Customer">
+			<id column="customer_id" property="customer_id"/>
+			<result column="customer_user" property="customer_user"/>
+			<result column="customer_tel" property="customer_tel"/>
+			<result column="customer_address" property="customer_address"/>
+		</association>
+	</resultMap>
+	<select id="queryGoodsList" resultMap="operAndCarAndCarlog">
+		SELECT 
+			a.id carid,username,car_number,tel,address,car_road,
+			d.customer_id,d.customer_user,d.customer_tel,d.customer_address,
+			b.id carlogid,startTime,endTime,describer,
+			c.id operid, c.goods_id,goods_name,goods_tel,goods_address,goods_sure
+		from  tb_operationgoods c left join  tb_car a 
+		on  a.id=c.car_id
+		LEFT JOIN tb_carlog b
+		on a.id=b.car_id
+		left join tb_customer d
+		on c.customer_id=d.customer_id
+	</select>
+	<!-- 根据编号查询发货单信息 -->
+	<select id="queryGoodsListByGoodsId" resultMap="operAndCarAndCarlog">
+		SELECT 
+			a.id carid,username,car_number,tel,address,car_road,
+			d.customer_id,d.customer_user,d.customer_tel,d.customer_address,
+			b.id carlogid,startTime,endTime,describer,
+			c.id operid, c.goods_id,goods_name,goods_tel,goods_address,goods_sure
+		from  tb_operationgoods c left join  tb_car a 
+		on  a.id=c.car_id
+		LEFT JOIN tb_carlog b
+		on a.id=b.car_id
+		left join tb_customer d
+		on c.customer_id=d.customer_id
+		where c.goods_id=#{goodsId}
+	</select>
+	
+	<!-- 删除发货单信息 -->
+	
+	<delete id="deleteOper">
+		delete from tb_operationgoods
+		where id=#{id}
+	</delete>
+	
+	<!-- 确认发货单回执 -->
+	<update id="updateOper">
+		update tb_operationgoods 
+		set goods_sure=1
+		where id=#{id}
+	</update>
+</mapper>

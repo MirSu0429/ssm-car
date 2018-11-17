@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.CarlogMapper">
+	<insert id="insertCarlog" parameterType="Carlog">
+		insert into tb_carlog
+		(goods_id,startTime,endTime,describer,car_id)
+		values(#{goods_id},#{startTime},#{endTime},#{describer},#{car.id})
+	</insert>
+	
+	<!-- 修改车俩信息里的 车辆id -->
+	<update id="updateCarlog">
+		UPDATE tb_carlog set car_id =null
+		where id=#{id}
+	</update>
+</mapper>

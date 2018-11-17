@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.CustomerMapper">
+	<select id="queryCustomer" resultType="Customer">
+		select customer_id,customer_user,customer_tel,customer_address from tb_customer order by customer_id
+	</select>
+	
+	<insert id="insertCustomer" parameterType="Customer">
+		insert into tb_customer (customer_user,customer_tel,customer_address) values(#{customer_user},#{customer_tel},#{customer_address})
+	</insert>
+	<delete id="deleteCustomer" parameterType="int">
+		delete from tb_customer where customer_id=#{id}
+	</delete>
+</mapper>
