@@ -23,6 +23,10 @@ public class CustomerController {
 		model.addAttribute("pageInfo", pageInfo);
 		return "customer/customer" ;
 	}
+
+
+
+
 	@RequestMapping("/insertCustomer.html")
 	public String insertCustomer(Customer cust){
 		custService.insertCustomer(cust);

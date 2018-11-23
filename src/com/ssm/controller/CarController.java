@@ -1,4 +1,4 @@
-package com.ssm.controller;
+﻿package com.ssm.controller;
 
 import javax.annotation.Resource;
 
@@ -13,7 +13,7 @@ import com.ssm.entity.Car;
 import com.ssm.sevice.CarService;
 
 @Controller
-public class CarController {
+public class CarController {      
 	@Resource
 	private CarService carService;
 	/**
@@ -26,6 +26,9 @@ public class CarController {
 		model.addAttribute("pageInfo", pageInfo);
 		return "car/car_list";
 	}
+
+
+
 	
 	/**
 	 * 查一个 打开修改  回显数据
